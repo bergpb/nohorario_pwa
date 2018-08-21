@@ -4,10 +4,11 @@
       <div class="title">Linhas Metropolitanas</div>
       <v-flex pt-2>
         <v-btn
-          v-for="linhas in linhasDisponiveis"
+          v-for="linha in linhasDisponiveis"
           block
           color="blue-grey"
-          @click="passValues(linhas.linkLinha)">{{linhas.linha}}</v-btn>
+          @click="passValues(linha.linkLinha)">
+          {{linha.linha}}</v-btn>
       </v-flex>
     </v-layout>
   </v-container>
@@ -41,8 +42,8 @@ export default {
   },
   methods:{
     passValues: function(item) {
-        this.nomeLinha = item
-        console.log(this.nomeLinha)
+      console.log("passing props: " + item)
+      this.$router.push({ name : 'horarioslinha', params: { linha: item }})
     }
   }
 }

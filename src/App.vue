@@ -42,7 +42,8 @@ export default {
       items: [{
         icon: 'home',
         title: 'Início',
-        link: '/'
+        link: '/',
+        props: true
       },
       {
         icon : 'directions_bus',

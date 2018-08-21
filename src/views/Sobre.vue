@@ -1,16 +1,13 @@
 <template>
   <v-container>
     <v-layout align-center justify-center wrap fill-height>
-      <p>Inicio</p>
+      <p>sobre</p>
     </v-layout>
   </v-container>
 </template>
 
 <script>
 
-export default {
-  name: 'inicio',
-}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

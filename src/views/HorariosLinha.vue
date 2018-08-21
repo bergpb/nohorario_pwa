@@ -1,15 +1,19 @@
 <template>
   <v-container>
     <v-layout align-center justify-center wrap fill-height>
-      <p>Inicio</p>
+      <horarios-component/>
     </v-layout>
   </v-container>
 </template>
 
 <script>
+import HorariosComponent from '@/components/HorariosComponent.vue'
 
 export default {
-  name: 'inicio',
+  name: 'horarioslinha',
+  components:{
+    HorariosComponent
+  }
 }
 </script>
 

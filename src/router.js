@@ -14,10 +14,17 @@ export default new Router({
     {
       path: '/linhas',
       name: 'linhas',
-      // route level code-splitting
-      // this generates a separate chunk (about.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import(/* webpackChunkName: "about" */ './views/Linhas.vue')
+      component: () => import('./views/Linhas.vue')
+    },
+    {
+      path: '/horarioslinha',
+      name: 'horarioslinha',
+      component: () => import('./views/HorariosLinha.vue')
+    },
+    {
+      path: '/sobre',
+      name: 'sobre',
+      component: () => import('./views/Sobre.vue')
     }
   ]
 })
