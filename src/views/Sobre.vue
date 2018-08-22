@@ -1,9 +1,9 @@
 <template>
-  <v-container>
+  <div>
     <v-layout align-center justify-center wrap fill-height>
-      <p>sobre</p>
+      <p>Aqui vai ficar o sobre.</p>
     </v-layout>
-  </v-container>
+  </div>
 </template>
 
 <script>

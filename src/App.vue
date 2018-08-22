@@ -1,44 +1,52 @@
 <template>
   <!-- Vai estar em todas as páginas -->
   <v-app>
-    <v-navigation-drawer
-      persistent
-      :mini-variant="false"
-      :clipped="false"
-      v-model="drawer"
-      width="200"
-      disable-resize-watcher
-      fixed
-      app
-    >
-      <v-list>
-        <v-list-tile value="true" v-for="(item, i) in items" :key="i" >
-          <v-list-tile-action>
-            <v-icon v-html="item.icon"></v-icon>
-          </v-list-tile-action>
-          <v-list-tile-content>
-            <router-link :to="item.link">
-              {{item.title}}
-            </router-link>
-          </v-list-tile-content>
-        </v-list-tile>
-      </v-list>
-    </v-navigation-drawer>
-    <v-toolbar app color="teal" :clipped-left="true">
+    <v-toolbar app color="teal">
       <v-toolbar-side-icon class="teal" @click.stop="drawer = !drawer"></v-toolbar-side-icon>
       <v-toolbar-title class="white--text title align-center">BusInTime</v-toolbar-title>
       <v-spacer></v-spacer>
     </v-toolbar>
+    <v-navigation-drawer persistent
+                         :mini-variant="false"
+                         :clipped="false"
+                         v-model="drawer"
+                         width="200"
+                         disable-resize-watcher
+                         fixed
+                         app>
+      <v-list>
+        <v-list-tile v-for="item in items"
+                     :value="item.active"
+                     :key="item.title"
+                     :to="item.link == '#' ? '' : item.link"
+                     :exact="item.exact"
+                     class="normal--text"
+                     active-class="blue--text">
+          <v-list-tile-action>
+            <v-icon v-html="item.icon"></v-icon>
+          </v-list-tile-action>
+          <v-list-tile-content>
+            <v-list-tile-title>{{item.title}}</v-list-tile-title>
+          </v-list-tile-content>
+        </v-list-tile>
+      </v-list>
+    </v-navigation-drawer>
     <v-content>
-      <router-view/>
+      <v-container fluid>
+        <v-fade-transition mode="out-in">
+          <router-view></router-view>
+        </v-fade-transition>
+      </v-container>
     </v-content>
   </v-app>
 </template>
+
 <script>
 export default {
   data () {
     return {
-      drawer: false,
+      drawer: true,
+      clipped: false,
       items: [{
         icon: 'home',
         title: 'Início',
@@ -77,21 +85,9 @@ a {
   font-weight: bold !important;
 }
 
-#nav {
-  padding: 30px;
-}
-
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-#nav a.router-link-exact-active {
-  color: #42b983;
-}
-
 .navbar-burger.right {
 	margin-right: auto;
 	margin-left: 0;
 }
+
 </style>

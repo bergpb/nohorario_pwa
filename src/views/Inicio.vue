@@ -1,9 +1,9 @@
 <template>
-  <v-container>
+  <div>
     <v-layout align-center justify-center wrap fill-height>
-      <p>Inicio</p>
+      <p>Aqui ficaram os horários próximos de acordo com a rota que o usuário selecionar.</p>
     </v-layout>
-  </v-container>
+  </div>
 </template>
 
 <script>

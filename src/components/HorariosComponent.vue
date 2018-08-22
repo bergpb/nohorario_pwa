@@ -1,10 +1,14 @@
 <template>
-  <v-container>
-    <v-tabs centered color="transparent" fixed-tabs>
-      <v-tab v-for="tab in tabs" @click="getTab(tab.valor)">
-        {{tab.nome}}
-      </v-tab>
+  <div>
+    <v-tabs slot="extension"
+            v-model="model"
+            centered
+            grow
+            color="transparent"
+            slider-color="teal">
+      <v-tab v-for="tab in tabs" @click="getTab(tab.valor)">{{tab.nome}}</v-tab>
     </v-tabs>
+    
     <p></p>
     <v-layout align-center justify-center wrap fill-height>
       <v-flex xs6 sm6 md6 lg6 xl6>
@@ -22,7 +26,7 @@
         </v-flex>
       </v-flex>
     </v-layout>
-  </v-container>
+  </div>
 </template>
 
 <script>
@@ -52,12 +56,10 @@ export default {
   methods: {
       updateData() {
         this.nomeLinha = this.$route.params.linha
-        fetch('http://localhost:5000/api/linha/'+this.nomeLinha)
+        fetch('http://localhost:5000/api/'+this.nomeLinha+'/'+this.desc_dia)
           .then(response => response.json())
           .then((res) => {
-            console.log(res)
             this.horarios = res
-            console.log(this.horarios.dias_uteis)
           })
           .catch(err => {
             this.error = err
