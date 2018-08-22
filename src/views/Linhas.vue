@@ -6,7 +6,7 @@
     <v-layout align-center justify-center wrap fill-height>
       <v-flex xs10 sm12 md6 lg6 xl6 pt-2>
         <v-btn
-          v-for="linha in linhasDisponiveis"
+          v-for="linha in linhasDisp"
           block
           color="blue-grey"
           @click="passValues(linha.linkLinha)">
@@ -19,10 +19,10 @@
 <script>
   export default {
     name: 'linhas',
-    linhasDisponiveis: null,
+    linhasDisp: null,
     data() {
       return{
-        linhasDisponiveis: [
+        linhasDisp: [
           {
             linha: 'Planato BR-020',
             linkLinha: 'planalto-br020'

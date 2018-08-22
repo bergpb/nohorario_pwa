@@ -18,7 +18,7 @@
         <v-list-tile v-for="item in items"
                      :value="item.active"
                      :key="item.title"
-                     :to="item.link == '#' ? '' : item.link"
+                     :to="item.link"
                      :exact="item.exact"
                      class="normal--text"
                      active-class="blue--text">
@@ -45,7 +45,7 @@
 export default {
   data () {
     return {
-      drawer: true,
+      drawer: false,
       clipped: false,
       items: [{
         icon: 'home',
