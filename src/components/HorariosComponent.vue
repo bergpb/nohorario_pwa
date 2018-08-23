@@ -8,9 +8,17 @@
         </v-flex>
       </v-layout>
     </div>
+    <div v-else-if="error">
+      <v-layout row wrap>
+        <v-flex class="text-center">
+          <p>Falha ao carregar informações!</p>
+          </v-flex>
+      </v-layout>
+    </div>
     <div v-else>
       <v-tabs slot="extension"
               centered
+              fixed-tabs
               grow
               color="transparent"
               slider-color="teal">
@@ -43,11 +51,11 @@
 export default {
   name: 'HorariosComponent',
   data () {
-    return{
-      desc_dia: 'dias_uteis',
+    return {
       horarios: null,
       nomeLinha: null,
       loading: true,
+      error: null,
       tabs: [
         {
           name: 'Dias Úteis',
@@ -65,29 +73,29 @@ export default {
     }
   },
   methods: {
-    updateData() {
+    updateData(tab_value) {
       this.nomeLinha = this.$route.params.linha
-      fetch('http://localhost:5000/api/'+this.nomeLinha+'/'+this.desc_dia)
+      fetch('https://busintimeapi.herokuapp.com/api/'+this.nomeLinha)
         .then(response => response.json())
         .then((res) => {
-          this.horarios = res
+          //passando uma propriedade como parâmetro
+          this.horarios = res[tab_value]
         })
         .catch(err => {
           this.error = err
-          console.log(err)
         })
         .finally(() => {
           this.loading = false
         })
       },
     getTab(tab_value) {
-      this.desc_dia = tab_value
-      this.updateData()
+      this.updateData(tab_value)
     }
   },
   mounted () {
     this.nomeLinha = this.$route.params.linha
-    this.updateData()
+    let tab_value = 'dias_uteis'
+    this.updateData(tab_value)
   }
 }
 </script>
