@@ -32,11 +32,9 @@
       </v-list>
     </v-navigation-drawer>
     <v-content>
-      <v-container fluid>
-        <v-fade-transition mode="out-in">
-          <router-view></router-view>
-        </v-fade-transition>
-      </v-container>
+      <v-fade-transition mode="out-in">
+        <router-view></router-view>
+      </v-fade-transition>
     </v-content>
   </v-app>
 </template>

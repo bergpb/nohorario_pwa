@@ -1,19 +1,15 @@
 <template>
-  <div>
-    <v-layout align-center justify-center wrap fill-height>
+  <v-layout align-center justify-center fill-height>
+    <v-flex xs10 sm12 md6 lg6 xl6>
       <div class="title">Linhas Metropolitanas</div>
-    </v-layout>
-    <v-layout align-center justify-center wrap fill-height>
-      <v-flex xs10 sm12 md6 lg6 xl6 pt-2>
-        <v-btn
-          v-for="linha in linhasDisp"
-          block
-          color="blue-grey"
-          @click="passValues(linha.linkLinha)">
-          {{linha.linha}}</v-btn>
-      </v-flex>
-    </v-layout>
-  </div>
+      <v-btn
+        v-for="linha in linhasDisp"
+        block
+        color="blue-grey"
+        @click="passValues(linha)">
+        {{linha.linha}}</v-btn>
+    </v-flex>
+  </v-layout>
 </template>
 
 <script>
@@ -44,7 +40,7 @@
     },
   methods:{
     passValues: function(item) {
-      this.$router.push({ name : 'horarioslinha', params: { linha: item }})
+      this.$router.push({ name : 'horarioslinha', params: { item }})
     }
   }
 }

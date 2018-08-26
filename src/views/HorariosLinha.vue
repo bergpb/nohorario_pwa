@@ -1,9 +1,7 @@
 <template>
-  <v-container>
-    <v-layout align-center justify-center wrap fill-height>
-      <horarios-component/>
-    </v-layout>
-  </v-container>
+  <v-layout align-center justify-center fill-height>
+    <horarios-component/>
+  </v-layout>
 </template>
 
 <script>

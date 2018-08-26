@@ -1,9 +1,7 @@
 <template>
-  <div>
-    <v-layout align-center justify-center wrap fill-height>
-      <p>Aqui ficaram os horários próximos de acordo com a rota que o usuário selecionar.</p>
-    </v-layout>
-  </div>
+  <v-layout align-center justify-center fill-height>
+    <p>Aqui ficarão os horários próximos de acordo com a rota que o usuário selecionar.</p>
+  </v-layout>
 </template>
 
 <script>

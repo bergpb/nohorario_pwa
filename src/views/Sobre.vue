@@ -1,16 +1,18 @@
 <template>
-  <div>
-    <v-layout align-center justify-center wrap fill-height>
-      <p>Aqui vai ficar o sobre.</p>
-    </v-layout>
-  </div>
+  <v-layout align-center justify-center row wrap fill-height>
+    <v-container>
+      <img src="@/assets/bus.png" />
+      <p style="text-align: justify">Tenha os horários dos ônibus sempre que precisar mesmo sem conexão com a internet.</p>
+      <p>O BusInTime baixa os horários no seu primeiro acesso a linha e salva para que você possa acessar mesmo sem estar conectado a internet.</p>
+    </v-container>
+  </v-layout>
 </template>
 
 <script>
-
+  export default {
+    name: 'sobre'
+  }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-
 </style>
