@@ -60,7 +60,7 @@ self.__precacheManifest = [
     "url": "/img/bus.408c88f6.png"
   },
   {
-    "revision": "d9c6bf11dc25f547b5b832d4665ea5d6",
+    "revision": "a4dc58ac3d7681bbf5f51503c73e985b",
     "url": "/index.html"
   },
   {

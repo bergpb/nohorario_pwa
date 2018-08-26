@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.4.1/workbox-sw.js");
 
 importScripts(
-  "/precache-manifest.61ab027d9c473eb168c9ea987a2e6e99.js"
+  "/precache-manifest.4ec1887d696b60fa146185585f86acbb.js"
 );
 
 workbox.core.setCacheNameDetails({prefix: "BusInTime"});
