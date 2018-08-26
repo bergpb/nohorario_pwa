@@ -1,40 +1,51 @@
 <template>
   <v-layout align-center justify-center fill-height>
-    <v-flex xs10 sm12 md6 lg6 xl6>
+    <v-container>
       <div class="title">Linhas Metropolitanas</div>
-      <v-btn
-        v-for="linha in linhasDisp"
-        block
-        color="blue-grey"
-        @click="passValues(linha)">
-        {{linha.linha}}</v-btn>
-    </v-flex>
+    </br>
+      <v-flex xs12 sm12 md12 lg12 xl12>
+        <v-btn
+          v-for="linha in linhas"
+          block
+          round
+          large
+          color="teal"
+          @click="passValues(linha)">
+          <strong>{{linha.linha}}</strong>
+        </v-btn>
+      </v-flex>
+    </v-container>
   </v-layout>
 </template>
 
 <script>
   export default {
     name: 'linhas',
-    linhasDisp: null,
+    linhas: null,
     data() {
       return{
-        linhasDisp: [
+        linhas: [
           {
-            linha: 'Planato BR-020',
-            linkLinha: 'planalto-br020'
+            linha: 'Capuan',
+            arquivo: 'capuan-fortaleza'
           },
           {
-            linha: 'Cumbuco / Fortaleza',
-            linkLinha: 'cumbuco-fortaleza'
+            linha: 'Caucaia',
+            arquivo: 'caucaia-fortaleza'
+          },
+          {
+            linha: 'Cumbuco',
+            arquivo: 'cumbuco-fortaleza'
+          },
+          {
+            linha: 'Planato BR-020',
+            arquivo: 'planalto-br020'
           },
           {
             linha: 'Planalto Caucaia',
-            linkLinha: 'planalto-caucaia'
+            arquivo: 'planalto-fortaleza'
           },
-          {
-            linha: 'Capuan',
-            linkLinha: 'capuan'
-          },
+
         ]
       }
     },

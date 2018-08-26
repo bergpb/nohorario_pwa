@@ -11,9 +11,27 @@
     </div>
     <div v-else-if="error">
       <v-layout row wrap>
-        <v-flex class="text-center">
-          <p>Falha ao carregar informações!</p>
-          </v-flex>
+        <v-dialog
+          v-model="dialog"
+          max-width="290"
+        >
+      <v-card>
+        <v-card-title class="headline">Ops!</v-card-title>
+        <v-card-text>
+          Algo de errado aconteceu, estamos trabalhando para corrigir o mais breve possível.
+        </v-card-text>
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn
+            color="teal"
+            flat="flat"
+            @click="$router.go(-1)"
+          >
+            Ok!
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
       </v-layout>
     </div>
     <div v-else>
@@ -46,11 +64,42 @@
       <v-layout class="horarios" align-center justify-center wrap fill-height>
         <table class="example-table">
           <tr v-for="horario in horarios">
-            <td><h1>{{ horario.inicio }}</h1></td>
-            <td></td>
-            <td><h1>{{ horario.fim }}</h1></td>
+            <td><h2>{{ horario.inicio }}</h2></td>
+            <td></td><td></td><td></td>
+            <td><h2>{{ horario.fim }}</h2></td>
           </tr>
         </table>
+      </v-layout>
+      <v-layout>
+        <v-container>
+          <div style="text-align: left" v-show = "nomeLinha.arquivo === 'planalto-fortaleza'">
+            <div style="text-align: left" class="title">Legendas:</div>
+            </br>
+            <p>(*) - Viagem atendendo ao Pe. Júlio Maria.</br>
+            (#) - Viagem atendendo ao terminal de Caucaia </br>
+            (VA#) - Viagem atendendo ao Conj. Vicente Arruda e terminal de Caucaia. </br>
+            (Cap) - Viagem Fortaleza/Planalto/Capuan </br>
+            Exp – Viagem feitas via EXPRESSO (só na bezerra de menezes)</p>
+          </div>
+          <div style="text-align: left" v-show = "nomeLinha.arquivo === 'caucaia-fortaleza'">
+            <div style="text-align: left" class="title">Legendas:</div>
+            </br>
+            <p>(#) - Viagem Somente na segunda-feira</br>
+            (PS) - Viagem via Parque Soledade</br>
+            (§) - Viagem até a Cione</p>
+          </div>
+          <div style="text-align: left" v-show = "nomeLinha.arquivo === 'capuan-fortaleza'">
+            <div style="text-align: left" class="title">Legendas:</div>
+            </br>
+            <p>(B) - Atende ao Boqueirão(Posto Bandeira Branca)</br>
+            (J) - Passa na Jandaiguaba</br>
+            (P) - Viagem atende a Pedreiras.</br>
+            (@) Viagem Fortaleza/Planalto/Capuan</br>
+            (#) - Viagem parte da movelária/Paizinha</br>
+            (%) - Segue até a Entrada da Pyla</br>
+            Obs.: Na viagem de 05:30 o carro parte às 05:20 de Pedreiras</p>
+          </div>
+        </v-container>
       </v-layout>
     </div>
   </div>
@@ -63,6 +112,7 @@ export default {
     return {
       horarios: null,
       nomeLinha: null,
+      linhaAtual: null,
       loading: true,
       error: null,
       res: null,
@@ -71,6 +121,7 @@ export default {
       mode: '',
       timeout: 5000,
       text: null,
+      dialog: false,
       tabs: [{ name: 'Dias Úteis',key: 'dias_uteis' },
              { name: 'Sábado', key: 'sabado' },
              { name: 'Domingo', key: 'domingo' }
@@ -79,24 +130,21 @@ export default {
   },
   methods: {
     checkLocalStorage(){
-      this.nomeLinha = this.$route.params.item
       this.getItem();
     },
     updateData() {
-      this.nomeLinha = this.$route.params.item
-      this.showSnackbar('Baixando horários e salvando.')
-      //fetch('https://busintimeapi.herokuapp.com/api/'+this.nomeLinha.linkLinha)
-      fetch('http://localhost:5000/api/'+this.nomeLinha.linkLinha)
+      fetch('https://busintimeapi.herokuapp.com/api/'+this.nomeLinha.arquivo)
+      // fetch('http://localhost:5000/api/'+this.nomeLinha.arquivo)
         .then(response => response.json())
         .then((res) => {
           this.res = res
           this.horarios = this.res['dias_uteis']
           this.saveItem();
-          this.showSnackbar('Horários salvos para consulta offline.')
         })
         .catch(err => {
           this.error = err
           console.log(this.error)
+          this.dialog = true;
         })
         .finally(() => {
           this.loading = false
@@ -106,19 +154,16 @@ export default {
       this.horarios = this.res[tab_value]
     },
     saveItem() {
-      localStorage.setItem(this.nomeLinha.linkLinha, JSON.stringify(this.res));
+      localStorage.setItem(this.nomeLinha.arquivo, JSON.stringify(this.res));
+      this.showSnackbar('Horários salvos para consulta mesmo sem internet.')
     },
     getItem(){
-      console.log('tentando recuperar do local storage')
-      this.res = JSON.parse(localStorage.getItem(this.nomeLinha.linkLinha));
-      console.log(this.res)
+      this.res = JSON.parse(localStorage.getItem(this.nomeLinha.arquivo));
       if (this.res != null){
-        console.log('estava no local')
         this.horarios = this.res['dias_uteis']
         this.loading = false
       }
       else{
-        console.log('trazendo da api')
         this.updateData()
       }
     },
@@ -128,6 +173,7 @@ export default {
     }
   },
   mounted () {
+    this.nomeLinha = this.$route.params.item
     this.checkLocalStorage();
   }
 }
