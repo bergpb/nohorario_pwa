@@ -17,7 +17,7 @@ importScripts(
   "/precache-manifest.61ab027d9c473eb168c9ea987a2e6e99.js"
 );
 
-workbox.core.setCacheNameDetails({prefix: "horario-onibus-pwa"});
+workbox.core.setCacheNameDetails({prefix: "BusInTime"});
 
 /**
  * The workboxSW.precacheAndRoute() method efficiently caches and responds to
