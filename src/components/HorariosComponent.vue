@@ -62,7 +62,7 @@
         </v-tab>
       </v-tabs>
       <v-layout class="horarios" align-center justify-center wrap fill-height>
-        <table class="example-table">
+        <table>
           <tr v-for="horario in horarios">
             <td><h2>{{ horario.inicio }}</h2></td>
             <td></td><td></td><td></td>
@@ -74,29 +74,29 @@
         <v-container>
           <div style="text-align: left" v-show = "nomeLinha.arquivo === 'planalto-fortaleza'">
             <div style="text-align: left" class="title">Legendas:</div>
-            </br>
-            <p>(*) - Viagem atendendo ao Pe. Júlio Maria.</br>
-            (#) - Viagem atendendo ao terminal de Caucaia </br>
-            (VA#) - Viagem atendendo ao Conj. Vicente Arruda e terminal de Caucaia. </br>
-            (Cap) - Viagem Fortaleza/Planalto/Capuan </br>
+            <br>
+            <p>(*) - Viagem atendendo ao Pe. Júlio Maria.<br>
+            (#) - Viagem atendendo ao terminal de Caucaia <br>
+            (VA#) - Viagem atendendo ao Conj. Vicente Arruda e terminal de Caucaia. <br>
+            (Cap) - Viagem Fortaleza/Planalto/Capuan <br>
             Exp – Viagem feitas via EXPRESSO (só na bezerra de menezes)</p>
           </div>
           <div style="text-align: left" v-show = "nomeLinha.arquivo === 'caucaia-fortaleza'">
             <div style="text-align: left" class="title">Legendas:</div>
-            </br>
-            <p>(#) - Viagem Somente na segunda-feira</br>
-            (PS) - Viagem via Parque Soledade</br>
+            <br>
+            <p>(#) - Viagem Somente na segunda-feira<br>
+            (PS) - Viagem via Parque Soledade<br>
             (§) - Viagem até a Cione</p>
           </div>
           <div style="text-align: left" v-show = "nomeLinha.arquivo === 'capuan-fortaleza'">
             <div style="text-align: left" class="title">Legendas:</div>
-            </br>
-            <p>(B) - Atende ao Boqueirão(Posto Bandeira Branca)</br>
-            (J) - Passa na Jandaiguaba</br>
-            (P) - Viagem atende a Pedreiras.</br>
-            (@) Viagem Fortaleza/Planalto/Capuan</br>
-            (#) - Viagem parte da movelária/Paizinha</br>
-            (%) - Segue até a Entrada da Pyla</br>
+            <br>
+            <p>(B) - Atende ao Boqueirão(Posto Bandeira Branca)<br>
+            (J) - Passa na Jandaiguaba<br>
+            (P) - Viagem atende a Pedreiras.<br>
+            (@) Viagem Fortaleza/Planalto/Capuan<br>
+            (#) - Viagem parte da movelária/Paizinha<br>
+            (%) - Segue até a Entrada da Pyla<br>
             Obs.: Na viagem de 05:30 o carro parte às 05:20 de Pedreiras</p>
           </div>
         </v-container>
@@ -174,7 +174,12 @@ export default {
   },
   mounted () {
     this.nomeLinha = this.$route.params.item
-    this.checkLocalStorage();
+    if (this.nomeLinha == null){
+        this.$router.push({ name : 'linhas'})
+    }
+    else{
+        this.checkLocalStorage();
+    }
   }
 }
 </script>
