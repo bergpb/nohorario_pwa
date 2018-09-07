@@ -106,6 +106,8 @@
 </template>
 
 <script>
+import { retornaDia } from '../utils/utils.js'
+
 export default {
   name: 'horarioscomponent',
   data () {
@@ -113,6 +115,7 @@ export default {
       horarios: null,
       nomeLinha: null,
       linhaAtual: null,
+      diaUtil: null,
       loading: true,
       error: null,
       res: null,
@@ -122,10 +125,11 @@ export default {
       timeout: 5000,
       text: null,
       dialog: false,
-      tabs: [{ name: 'Dias Úteis',key: 'dias_uteis' },
-             { name: 'Sábado', key: 'sabado' },
-             { name: 'Domingo', key: 'domingo' }
-      ],
+      tabs: [
+                { name: 'Dias Úteis',key: 'dias_uteis' },
+                { name: 'Sábado', key: 'sabado' },
+                { name: 'Domingo', key: 'domingo' }
+        ],
     }
   },
   methods: {
@@ -138,7 +142,7 @@ export default {
         .then(response => response.json())
         .then((res) => {
           this.res = res
-          this.horarios = this.res['dias_uteis']
+          this.horarios = this.res[this.diaUtil]
           this.saveItem();
         })
         .catch(err => {
@@ -158,12 +162,15 @@ export default {
       this.showSnackbar('Horários salvos para consulta mesmo sem internet.')
     },
     getItem(){
+      // se json existir no local traz dele
       this.res = JSON.parse(localStorage.getItem(this.nomeLinha.arquivo));
       if (this.res != null){
-        this.horarios = this.res['dias_uteis']
+        this.horarios = this.res[this.diaUtil]
         this.loading = false
       }
       else{
+        // se não busca na api.
+        // mostrar aviso caso usuario tente baixar um sem conexão com a internet
         this.updateData()
       }
     },
@@ -173,6 +180,7 @@ export default {
     }
   },
   mounted () {
+    this.diaUtil = retornaDia()
     this.nomeLinha = this.$route.params.item
     if (this.nomeLinha == null){
         this.$router.push({ name : 'linhas'})
@@ -198,8 +206,8 @@ export default {
 }
 
 td {
-  padding-top: 10px;
-  padding: 12px;
+  padding-top: 5px;
+  padding: 10px;
 }
 
 </style>
