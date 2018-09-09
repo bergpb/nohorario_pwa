@@ -1,37 +1,49 @@
 <template>
   <div>
     <div v-if="loading">
-      <v-layout row wrap>
-        <v-flex xs6 sm6 md6 lg6 xl6>
+      <v-layout
+        row
+        wrap>
+        <v-flex
+          xs6
+          sm6
+          md6
+          lg6
+          xl6>
           <div class="text-xs-center">
-            <v-progress-circular :size="40" color="primary" indeterminate></v-progress-circular>
+            <v-progress-circular
+              :size="40"
+              color="primary"
+              indeterminate/>
           </div>
         </v-flex>
       </v-layout>
     </div>
     <div v-else-if="error">
-      <v-layout row wrap>
+      <v-layout
+        row
+        wrap>
         <v-dialog
           v-model="dialog"
           max-width="290"
         >
-      <v-card>
-        <v-card-title class="headline">Ops!</v-card-title>
-        <v-card-text>
-          Algo de errado aconteceu, estamos trabalhando para corrigir o mais breve possível.
-        </v-card-text>
-        <v-card-actions>
-          <v-spacer></v-spacer>
-          <v-btn
-            color="teal"
-            flat="flat"
-            @click="$router.go(-1)"
-          >
-            Ok!
-          </v-btn>
-        </v-card-actions>
-      </v-card>
-    </v-dialog>
+          <v-card>
+            <v-card-title class="headline">Ops!</v-card-title>
+            <v-card-text>
+              Algo de errado aconteceu, estamos trabalhando para corrigir o mais breve possível.
+            </v-card-text>
+            <v-card-actions>
+              <v-spacer/>
+              <v-btn
+                color="teal"
+                flat="flat"
+                @click="$router.go(-1)"
+              >
+                Ok!
+              </v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-dialog>
       </v-layout>
     </div>
     <div v-else>
@@ -41,63 +53,83 @@
         :multi-line="mode === 'multi-line'"
         :timeout="timeout"
         :vertical="mode === 'vertical'"
-        >
-      {{ text }}
-      <v-btn
-        color="teal"
-        flat
-        @click="snackbar = false"
       >
-        Ok
-      </v-btn>
-    </v-snackbar>
-      <v-tabs slot="extension"
-              centered
-              fixed-tabs
-              grow
-              color="blue-grey lighten-5"
-              slider-color="teal">
-        <v-tab v-for="tab in tabs" @click="getTab(tab.key)">
-          {{tab.name}}
+        {{ text }}
+        <v-btn
+          color="teal"
+          flat
+          @click="snackbar = false"
+        >
+          Ok
+        </v-btn>
+      </v-snackbar>
+      <v-tabs
+        slot="extension"
+        centered
+        fixed-tabs
+        grow
+        color="blue-grey lighten-5"
+        slider-color="teal">
+        <v-tab
+          v-for="tab in tabs"
+          @click="getTab(tab.key)">
+          {{ tab.name }}
         </v-tab>
       </v-tabs>
-      <v-layout class="horarios" align-center justify-center wrap fill-height>
+      <v-layout
+        class="horarios"
+        align-center
+        justify-center
+        wrap
+        fill-height>
         <table>
           <tr v-for="horario in horarios">
             <td><h2>{{ horario.inicio }}</h2></td>
-            <td></td><td></td><td></td>
+            <td/><td/><td/>
             <td><h2>{{ horario.fim }}</h2></td>
           </tr>
         </table>
       </v-layout>
       <v-layout>
         <v-container>
-          <div style="text-align: left" v-show = "nomeLinha.arquivo === 'planalto-fortaleza'">
-            <div style="text-align: left" class="title">Legendas:</div>
+          <div
+            v-show = "nomeLinha.arquivo === 'planalto-fortaleza'"
+            style="text-align: left">
+            <div
+              style="text-align: left"
+              class="title">Legendas:</div>
             <br>
             <p>(*) - Viagem atendendo ao Pe. Júlio Maria.<br>
-            (#) - Viagem atendendo ao terminal de Caucaia <br>
-            (VA#) - Viagem atendendo ao Conj. Vicente Arruda e terminal de Caucaia. <br>
-            (Cap) - Viagem Fortaleza/Planalto/Capuan <br>
-            Exp – Viagem feitas via EXPRESSO (só na bezerra de menezes)</p>
+              (#) - Viagem atendendo ao terminal de Caucaia <br>
+              (VA#) - Viagem atendendo ao Conj. Vicente Arruda e terminal de Caucaia. <br>
+              (Cap) - Viagem Fortaleza/Planalto/Capuan <br>
+              Exp – Viagem feitas via EXPRESSO (só na bezerra de menezes)</p>
           </div>
-          <div style="text-align: left" v-show = "nomeLinha.arquivo === 'caucaia-fortaleza'">
-            <div style="text-align: left" class="title">Legendas:</div>
+          <div
+            v-show = "nomeLinha.arquivo === 'caucaia-fortaleza'"
+            style="text-align: left">
+            <div
+              style="text-align: left"
+              class="title">Legendas:</div>
             <br>
             <p>(#) - Viagem Somente na segunda-feira<br>
-            (PS) - Viagem via Parque Soledade<br>
-            (§) - Viagem até a Cione</p>
+              (PS) - Viagem via Parque Soledade<br>
+              (§) - Viagem até a Cione</p>
           </div>
-          <div style="text-align: left" v-show = "nomeLinha.arquivo === 'capuan-fortaleza'">
-            <div style="text-align: left" class="title">Legendas:</div>
+          <div
+            v-show = "nomeLinha.arquivo === 'capuan-fortaleza'"
+            style="text-align: left">
+            <div
+              style="text-align: left"
+              class="title">Legendas:</div>
             <br>
             <p>(B) - Atende ao Boqueirão(Posto Bandeira Branca)<br>
-            (J) - Passa na Jandaiguaba<br>
-            (P) - Viagem atende a Pedreiras.<br>
-            (@) Viagem Fortaleza/Planalto/Capuan<br>
-            (#) - Viagem parte da movelária/Paizinha<br>
-            (%) - Segue até a Entrada da Pyla<br>
-            Obs.: Na viagem de 05:30 o carro parte às 05:20 de Pedreiras</p>
+              (J) - Passa na Jandaiguaba<br>
+              (P) - Viagem atende a Pedreiras.<br>
+              (@) Viagem Fortaleza/Planalto/Capuan<br>
+              (#) - Viagem parte da movelária/Paizinha<br>
+              (%) - Segue até a Entrada da Pyla<br>
+              Obs.: Na viagem de 05:30 o carro parte às 05:20 de Pedreiras</p>
           </div>
         </v-container>
       </v-layout>
@@ -109,7 +141,7 @@
 import { retornaDia } from '../utils/utils.js'
 
 export default {
-  name: 'horarioscomponent',
+  name: 'Horarioscomponent',
   data () {
     return {
       horarios: null,
@@ -130,6 +162,17 @@ export default {
                 { name: 'Sábado', key: 'sabado' },
                 { name: 'Domingo', key: 'domingo' }
         ],
+    }
+  },
+  mounted () {
+    this.diaUtil = retornaDia()
+    console.log(this.diaUtil)
+    this.nomeLinha = this.$route.params.item
+    if (this.nomeLinha == null){
+      this.$router.push({ name : 'linhas'})
+    }
+    else{
+      this.checkLocalStorage();
     }
   },
   methods: {
@@ -179,16 +222,6 @@ export default {
       this.text = msg
     }
   },
-  mounted () {
-    this.diaUtil = retornaDia()
-    this.nomeLinha = this.$route.params.item
-    if (this.nomeLinha == null){
-        this.$router.push({ name : 'linhas'})
-    }
-    else{
-        this.checkLocalStorage();
-    }
-  }
 }
 </script>
 

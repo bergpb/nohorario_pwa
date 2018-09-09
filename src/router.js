@@ -22,6 +22,11 @@ export default new Router({
       component: () => import('./views/HorariosLinha.vue')
     },
     {
+      path: '/horariosproximos',
+      name: 'horariosproximos',
+      component: () => import('./views/HorariosProximos.vue')
+    },
+    {
       path: '/sobre',
       name: 'sobre',
       component: () => import('./views/Sobre.vue')

@@ -1,5 +1,8 @@
 <template>
-  <v-layout align-center justify-center fill-height>
+  <v-layout 
+    align-center 
+    justify-center 
+    fill-height>
     <horarios-component/>
   </v-layout>
 </template>
@@ -8,7 +11,7 @@
 import HorariosComponent from '@/components/HorariosComponent.vue'
 
 export default {
-  name: 'horarioslinha',
+  name: 'Horarioslinha',
   components:{
     HorariosComponent
   }
