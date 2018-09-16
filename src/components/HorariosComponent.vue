@@ -52,14 +52,12 @@
         :color="color"
         :multi-line="mode === 'multi-line'"
         :timeout="timeout"
-        :vertical="mode === 'vertical'"
-      >
+        :vertical="mode === 'vertical'">
         {{ text }}
         <v-btn
           color="teal"
           flat
-          @click="snackbar = false"
-        >
+          @click="snackbar = false">
           Ok
         </v-btn>
       </v-snackbar>
@@ -85,7 +83,7 @@
         <table>
           <tr v-for="horario in horarios">
             <td><h2>{{ horario.inicio }}</h2></td>
-            <td/><td/><td/>
+            <td></td>
             <td><h2>{{ horario.fim }}</h2></td>
           </tr>
         </table>

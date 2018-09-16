@@ -1,26 +1,26 @@
 <template>
   <!-- Vai estar em todas as páginas -->
   <v-app>
-    <v-toolbar 
-      app 
+    <v-toolbar
+      app
       color="teal">
-      <v-toolbar-side-icon 
-        class="teal" 
+      <v-toolbar-side-icon
+        class="teal"
         @click.stop="drawer = !drawer"/>
-      <v-toolbar-title class="white--text title align-center">BusInTime</v-toolbar-title>
+      <v-toolbar-title class="white--text title align-center">No Horário</v-toolbar-title>
       <v-spacer/>
     </v-toolbar>
-    <v-navigation-drawer 
+    <v-navigation-drawer
       :mini-variant="false"
       :clipped="false"
       v-model="drawer"
       persistent
-      width="200"
+      width="180"
       disable-resize-watcher
       fixed
       app>
       <v-list>
-        <v-list-tile 
+        <v-list-tile
           v-for="item in items"
           :value="item.active"
           :key="item.title"
@@ -85,7 +85,7 @@ a {
   text-decoration: none;
 }
 
-.title{
+.title {
   font-weight: bold !important;
 }
 
@@ -93,5 +93,4 @@ a {
 	margin-right: auto;
 	margin-left: 0;
 }
-
 </style>

@@ -27,14 +27,18 @@
 </template>
 
 <script>
-  export default {
-    name: 'linhas',
-    linhas: null,
-    data() {
-      return{
-      }
-    },
-  methods:{
+import { retornaLinhasDisponiveis } from '../utils/utils.js'
+export default {
+  name: 'linhas',
+  data () {
+    return {
+      linhas: null,
+    }
+  },
+  mounted () {
+    this.linhas = retornaLinhasDisponiveis();
+  },
+  methods: {
     passValues: function(item) {
       this.$router.push({ name : 'horarioslinha', params: { item }})
     }

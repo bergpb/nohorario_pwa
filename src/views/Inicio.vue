@@ -7,7 +7,7 @@
     row
     wrap>
     <v-container>
-      <div class="title">Linhas Metropolitanas</div>
+      <div class="title">Selecione uma linha:</div>
     </br>
       <v-flex
         xs12
@@ -34,20 +34,20 @@ const moment = require('moment')
 import { retornaDia, retornaLinhasDisponiveis } from '../utils/utils.js'
 
 export default {
-  name: 'Inicio',
+  name: 'inicio',
   data () {
-      return {
-        linhas: null,
-      }
-    },
-  mounted () {
-    this.linhas = retornaLinhasDisponiveis();
+    return {
+      linhas: null,
+    }
   },
   methods: {
     passValues: function(item) {
       this.$router.push({ name : 'horariosproximos', params: { item }})
     }
-  }
+  },
+  mounted () {
+    this.linhas = retornaLinhasDisponiveis();
+  },
 }
 </script>
 
