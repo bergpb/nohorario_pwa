@@ -1,23 +1,13 @@
 <template>
   <div>
     <div v-if="loading">
-      <v-layout
-        row
-        wrap>
-        <v-flex
-          xs6
-          sm6
-          md6
-          lg6
-          xl6>
-          <div class="text-xs-center">
-            <v-progress-circular
-              :size="40"
-              color="primary"
-              indeterminate/>
-          </div>
-        </v-flex>
-      </v-layout>
+      <v-container fill-height>
+          <v-layout row wrap>
+            <v-flex class="text-xs-center">
+              <v-progress-circular :size="70" :width="7" indeterminate color="teal"></v-progress-circular>
+            </v-flex>
+          </v-layout>
+        </v-container>
     </div>
     <div v-else-if="error">
       <v-layout
@@ -164,7 +154,6 @@ export default {
   },
   mounted () {
     this.diaUtil = retornaDia()
-    console.log(this.diaUtil)
     this.nomeLinha = this.$route.params.item
     if (this.nomeLinha == null){
       this.$router.push({ name : 'linhas'})
@@ -175,7 +164,17 @@ export default {
   },
   methods: {
     checkLocalStorage(){
-      this.getItem();
+      // se json existir no local traz dele
+      this.res = JSON.parse(localStorage.getItem(this.nomeLinha.arquivo));
+      if (this.res != null){
+        this.horarios = this.res[this.diaUtil]
+        this.loading = false
+      }
+      else{
+        // se não busca na api.
+        // mostrar aviso caso usuario tente baixar um sem conexão com a internet
+        this.updateData()
+      }
     },
     updateData() {
       fetch('https://busintimeapi.herokuapp.com/api/'+this.nomeLinha.arquivo)
@@ -194,26 +193,13 @@ export default {
         .finally(() => {
           this.loading = false
         })
-      },
+    },
     getTab(tab_value) {
       this.horarios = this.res[tab_value]
     },
     saveItem() {
       localStorage.setItem(this.nomeLinha.arquivo, JSON.stringify(this.res));
-      this.showSnackbar('Horários salvos para consulta mesmo sem internet.')
-    },
-    getItem(){
-      // se json existir no local traz dele
-      this.res = JSON.parse(localStorage.getItem(this.nomeLinha.arquivo));
-      if (this.res != null){
-        this.horarios = this.res[this.diaUtil]
-        this.loading = false
-      }
-      else{
-        // se não busca na api.
-        // mostrar aviso caso usuario tente baixar um sem conexão com a internet
-        this.updateData()
-      }
+      this.showSnackbar('Horários salvos! Agora será possível acessá-los mesmo sem internet.')
     },
     showSnackbar(msg){
       this.snackbar = true

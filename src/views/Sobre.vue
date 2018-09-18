@@ -1,9 +1,9 @@
 <template>
-  <v-layout 
-    align-center 
-    justify-center 
-    row 
-    wrap 
+  <v-layout
+    align-center
+    justify-center
+    row
+    wrap
     fill-height>
     <v-container>
       <!--<img src="@/assets/bus.png" />-->
@@ -15,7 +15,7 @@
 
 <script>
   export default {
-    name: 'Sobre'
+    name: 'sobre'
   }
 </script>
 
