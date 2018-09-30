@@ -12,6 +12,11 @@ export default new Router({
       component: Inicio
     },
     {
+      path: '/linha-preferida',
+      name: 'linha-preferida',
+      component: () => import('./views/LinhaPreferida.vue')
+    },
+    {
       path: '/linhas',
       name: 'linhas',
       component: () => import('./views/Linhas.vue')

@@ -4,7 +4,7 @@
     justify-center
     fill-height>
     <v-container>
-      <div class="title">Linhas Metropolitanas</div>
+      <div class="title">Linhas Metropolitanas:</div>
     </br>
       <v-flex
         xs12
@@ -14,8 +14,7 @@
         xl12>
         <v-btn
           v-for="linha in linhas"
-          block
-          round
+          outline
           large
           color="teal"
           @click="passValues(linha)">
@@ -29,7 +28,7 @@
 <script>
 import { retornaLinhasDisponiveis } from '../utils/utils.js'
 export default {
-  name: 'linhas',
+  name: 'Linhas',
   data () {
     return {
       linhas: null,

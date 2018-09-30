@@ -1,7 +1,7 @@
 <template>
-  <v-layout 
-    align-center 
-    justify-center 
+  <v-layout
+    align-center
+    justify-center
     fill-height>
     <horarios-component/>
   </v-layout>

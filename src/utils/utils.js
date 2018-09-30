@@ -1,14 +1,12 @@
-// functions to use in app
-
 export function retornaDia(){
     let dias = ['domingo', 'segunda', 'terça', 'quarta', 'quinta', 'sexta', 'sabado'];
     let dia = dias[new Date().getDay()];
     if (dia === 'sabado' || dia === 'domingo'){
-        return dia
+        return dia;
     }
     else {
-        dia = 'dias_uteis'
-        return dia
+        dia = 'dias_uteis';
+        return dia;
     }
 }
 
@@ -39,6 +37,14 @@ export function retornaLinhasDisponiveis(){
       pontoPartida: 'Planalto Caucaia',
       arquivo: 'planalto-fortaleza'
     },
-  ]
-  return linhas
+  ];
+  return linhas;
+}
+
+export function salvaLocalStorage(item, value){
+  return localStorage.setItem(item, value);
+}
+
+export function retornaLocalStorage(item) {
+  return JSON.parse(localStorage.getItem(item));
 }

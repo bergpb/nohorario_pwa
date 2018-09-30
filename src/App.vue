@@ -3,9 +3,8 @@
   <v-app>
     <v-toolbar
       app
-      color="teal">
+      color="orange">
       <v-toolbar-side-icon
-        class="teal"
         @click.stop="drawer = !drawer"/>
       <v-toolbar-title class="white--text title align-center">No Horário</v-toolbar-title>
       <v-spacer/>
@@ -15,7 +14,7 @@
       :clipped="false"
       v-model="drawer"
       persistent
-      width="180"
+      width="240"
       disable-resize-watcher
       fixed
       app>
@@ -27,7 +26,7 @@
           :to="item.link"
           :exact="item.exact"
           class="normal--text"
-          active-class="blue--text">
+          active-class="orange--text">
           <v-list-tile-action>
             <v-icon v-html="item.icon"/>
           </v-list-tile-action>
@@ -58,8 +57,13 @@ export default {
         props: true
       },
       {
+        icon : 'info',
+        title: 'Horários Próximos',
+        link: '/horariosproximos'
+      },
+      {
         icon : 'directions_bus',
-        title: 'Linhas',
+        title: 'Linhas Disponíveis',
         link: '/linhas'
       },
       {
