@@ -101,10 +101,10 @@
               class="title">Legendas:</div>
             <br>
             <p>(*) - Viagem atendendo ao Pe. Júlio Maria.<br>
-              (#) - Viagem atendendo ao terminal de Caucaia <br>
-              (VA#) - Viagem atendendo ao Conj. Vicente Arruda e terminal de Caucaia. <br>
-              (Cap) - Viagem Fortaleza/Planalto/Capuan <br>
-              Exp – Viagem feitas via EXPRESSO (só na bezerra de menezes)</p>
+              (#) - Viagem atendendo ao terminal de Caucaia.<br>
+              (VA#) - Viagem atendendo ao Conj. Vicente Arruda e terminal de Caucaia.<br>
+              (Cap) - Viagem Fortaleza/Planalto/Capuan.<br>
+              Exp – Viagem feitas via EXPRESSO (só na bezerra de menezes).</p>
           </div>
           <div
             v-show = "nomeLinha.arquivo === 'caucaia-fortaleza'"
@@ -113,9 +113,9 @@
               style="text-align: left"
               class="title">Legendas:</div>
             <br>
-            <p>(#) - Viagem Somente na segunda-feira<br>
-              (PS) - Viagem via Parque Soledade<br>
-              (§) - Viagem até a Cione</p>
+            <p>(#) - Viagem Somente na segunda-feira.<br>
+              (PS) - Viagem via Parque Soledade.<br>
+              (§) - Viagem até a Cione.</p>
           </div>
           <div
             v-show = "nomeLinha.arquivo === 'capuan-fortaleza'"
@@ -124,13 +124,33 @@
               style="text-align: left"
               class="title">Legendas:</div>
             <br>
-            <p>(B) - Atende ao Boqueirão(Posto Bandeira Branca)<br>
-              (J) - Passa na Jandaiguaba<br>
+            <p>(B) - Atende ao Boqueirão(Posto Bandeira Branca).<br>
+              (J) - Passa na Jandaiguaba.<br>
               (P) - Viagem atende a Pedreiras.<br>
-              (@) Viagem Fortaleza/Planalto/Capuan<br>
-              (#) - Viagem parte da movelária/Paizinha<br>
-              (%) - Segue até a Entrada da Pyla<br>
-              Obs.: Na viagem de 05:30 o carro parte às 05:20 de Pedreiras</p>
+              (@) Viagem Fortaleza/Planalto/Capuan.<br>
+              (#) - Viagem parte da movelária/Paizinha.<br>
+              (%) - Segue até a Entrada da Pyla.<br>
+              Obs.: Na viagem de 05:30 o carro parte às 05:20 de Pedreira.s</p>
+          </div>
+          <div
+            v-show = "nomeLinha.arquivo === 'metropole1-fortaleza'"
+            style="text-align: left">
+            <div
+              style="text-align: left"
+              class="title">Legendas:</div>
+            <br>
+            <p>(*) - Viagem atendendo a rota 2 e sai na rota 1.<br>
+               (T) - Viagem atendendo a localidade de Tôco.</p>
+          </div>
+          <div
+            v-show = "nomeLinha.arquivo === 'metropole2-fortaleza'"
+            style="text-align: left">
+            <div
+              style="text-align: left"
+              class="title">Legendas:</div>
+            <br>
+            <p>(*) - Viagem atendendo a rota 2 e sai na rota 1.<br>
+               (T) - Viagem atendendo a localidade de Tôco.</p>
           </div>
         </v-container>
       </v-layout>
