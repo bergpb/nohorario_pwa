@@ -60,6 +60,18 @@ export function retornaLinhasDisponiveis(){
       arquivo: 'planalto-fortaleza',
       preco: 'R$ 3,40'
     },
+    {
+      linha: 'Metrópole 1',
+      pontoPartida: 'Metrópole',
+      arquivo: 'metropole1-fortaleza',
+      preco: 'R$ 3,40'
+    },
+    {
+      linha: 'Metrópole 2',
+      pontoPartida: 'Metrópole',
+      arquivo: 'metropole2-fortaleza',
+      preco: 'R$ 3,40'
+    },
   ];
   return linhas;
 }
