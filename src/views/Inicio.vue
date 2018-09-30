@@ -28,6 +28,7 @@
         <br>
         <h3>Linha Preferida: {{ linhaPreferida.linha }}</h3>
         <br>
+        <p>Para mostrar os horários da linha preferida selecione o menu Horários Próximos.</p>
         <p>Para selecionar uma nova linha, acesse o menu Sobre.</p>
         <br>
       </div>
