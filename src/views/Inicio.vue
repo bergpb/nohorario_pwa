@@ -10,7 +10,7 @@
       <div v-if="linhaPreferida == null">
         <h2>Bem vindo.</h2>
         <br>
-        <h3>Para melhor funcinalidade do aplicativo escolha uma das opções abaixo:</h3>
+        <h3>Para melhor funcionalidade do aplicativo escolha uma das opções abaixo:</h3>
         <br>
         <v-btn
           large

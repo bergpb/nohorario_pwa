@@ -1,7 +1,7 @@
 module.exports = {
   pwa: {
-    name: 'BusInTime',
-    msTileColor: '#4DBA87'
+    name: 'No Horário',
+    msTileColor: '#EF6C00'
   },
 
   lintOnSave: undefined

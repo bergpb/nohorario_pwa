@@ -1,6 +1,6 @@
 {
-  "name": "No Horário",
-  "short_name": "No Horário",
+  "name": "BusInTime",
+  "short_name": "BusInTime",
   "icons": [
     {
       "src": "/img/icons/icon-192x192.png",
@@ -15,6 +15,6 @@
   ],
   "start_url": "/index.html",
   "display": "standalone",
-  "background_color": "#EF6C00",
-  "theme_color": "#EF6C00"
+  "background_color": "teal",
+  "theme_color": "teal"
 }

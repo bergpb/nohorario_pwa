@@ -157,6 +157,7 @@ export default {
       msg: '',
       dialog_success: false,
       dialog_error: false,
+      error: false,
       tabs: [
                 { name: 'Dias Úteis',key: 'dias_uteis' },
                 { name: 'Sábado', key: 'sabado' },
@@ -168,7 +169,7 @@ export default {
     this.diaUtil = retornaDia()
     this.nomeLinha = this.$route.params.item
     if (this.nomeLinha == null){
-      this.$router.push({ name : 'linhas'})
+      this.$router.push({ name : 'inicio'})
     }
     else{
       this.checkLocalStorage();
@@ -198,9 +199,9 @@ export default {
           this.saveItem()
         })
         .catch(err => {
-          this.msg = err
-          console.log(this.msg)
-          this.dialog_error = true;
+          this.error = true
+          this.msg = "Falha ao baixar os horários, conecte-se a internet e tente novamente."
+          this.dialog_error = true
         })
         .finally(() => {
           this.loading = false

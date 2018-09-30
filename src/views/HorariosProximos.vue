@@ -111,6 +111,26 @@
               </v-card>
             </v-dialog>
           </div>
+          <div v-else-if="err === true">
+            <v-dialog
+              v-model="dialog"
+              max-width="290"
+              v-bind:persistent=true
+            >
+              <v-card>
+                <v-card-title class="headline">Sem conexão!</v-card-title>
+                <v-card-text>{{msg}}</v-card-text>
+                <v-btn
+                    color="teal"
+                    flat="flat"
+                    @click="goToRoute('linhas')">
+                    Ok
+                  </v-btn>
+                <v-card-actions>
+                </v-card-actions>
+              </v-card>
+            </v-dialog>
+          </div>
           <div v-else-if="successInicio === false">
             <v-dialog
               v-model="dialog"
@@ -125,26 +145,6 @@
                     color="teal"
                     flat="flat"
                     @click="goToRoute('inicio')">
-                    Ok
-                  </v-btn>
-                <v-card-actions>
-                </v-card-actions>
-              </v-card>
-            </v-dialog>
-          </div>
-          <div v-else-if="err === true">
-            <v-dialog
-              v-model="dialog"
-              max-width="290"
-              v-bind:persistent=true
-            >
-              <v-card>
-                <v-card-title class="headline">Sem conexão!</v-card-title>
-                <v-card-text>{{msg}}</v-card-text>
-                <v-btn
-                    color="teal"
-                    flat="flat"
-                    @click="goToRoute('linhas')">
                     Ok
                   </v-btn>
                 <v-card-actions>
@@ -250,9 +250,11 @@ export default {
       let inicio = this.compareTimeInicio(this.horarioAtual);
       let fim = this.compareTimeFim(this.horarioAtual);
       if (inicio === false && fim === false){
-          this.successInicio = false
-          this.dialog = true
           clearInterval(this.interval);
+          this.successInicio = false
+          if (this.dialog === false){
+              this.dialog = true
+          }
       }
     },
     goToRoute: function(route){
