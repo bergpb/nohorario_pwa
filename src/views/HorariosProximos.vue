@@ -31,26 +31,28 @@
             </v-container>
           </div>
           <div v-else-if="successInicio === true && successFim === true">
-            <v-dialog v-if="dialog === true"
+            <v-dialog
+              v-if="dialog === true"
               v-model="dialog"
+              :persistent="true"
               max-width="290"
-              v-bind:persistent=true
             >
               <v-card>
                 <v-card-title class="headline">Horários salvos!</v-card-title>
-                <v-card-text>{{msg}}</v-card-text>
+                <v-card-text>{{ msg }}</v-card-text>
                 <v-btn
-                    color="teal"
-                    flat="flat"
-                    @click="dialog = false">
-                    Ok
-                  </v-btn>
-                <v-card-actions>
-                </v-card-actions>
+                  color="teal"
+                  flat="flat"
+                  @click="dialog = false">
+                  Ok
+                </v-btn>
+                <v-card-actions/>
               </v-card>
             </v-dialog>
-            <h1>{{ horarioAtual }}</h1>
-            <h2>{{ item.linha }}</h2>
+            <p style="font-size: 6em"><strong>{{ horarioAtual }}</strong></p>
+            <h1>{{ item.linha }}</h1>
+            <h3>Valor: {{ item.preco }}</h3>
+            <br>
             <table width="200px">
               <tr>
                 <td>
@@ -94,61 +96,58 @@
           <div v-else-if="selecione === true">
             <v-dialog
               v-model="dialog"
+              :persistent="true"
               max-width="290"
-              v-bind:persistent=true
             >
               <v-card>
                 <v-card-title class="headline">Ops!</v-card-title>
-                <v-card-text>{{msg}}</v-card-text>
+                <v-card-text>{{ msg }}</v-card-text>
                 <v-btn
-                    color="teal"
-                    flat="flat"
-                    @click="goToRoute('inicio')">
-                    Selecionar uma linha agora!
-                  </v-btn>
-                <v-card-actions>
-                </v-card-actions>
+                  color="teal"
+                  flat="flat"
+                  @click="goToRoute('inicio')">
+                  Selecionar uma linha agora!
+                </v-btn>
+                <v-card-actions/>
               </v-card>
             </v-dialog>
           </div>
-          <div v-else-if="err === true">
+          <div v-else-if="error">
             <v-dialog
               v-model="dialog"
+              :persistent="true"
               max-width="290"
-              v-bind:persistent=true
             >
               <v-card>
                 <v-card-title class="headline">Sem conexão!</v-card-title>
-                <v-card-text>{{msg}}</v-card-text>
+                <v-card-text>{{ msg }}</v-card-text>
                 <v-btn
-                    color="teal"
-                    flat="flat"
-                    @click="goToRoute('linhas')">
-                    Ok
-                  </v-btn>
-                <v-card-actions>
-                </v-card-actions>
+                  color="teal"
+                  flat="flat"
+                  @click="goToRoute('linhas')">
+                  Ok
+                </v-btn>
+                <v-card-actions/>
               </v-card>
             </v-dialog>
           </div>
           <div v-else-if="successInicio === false">
             <v-dialog
               v-model="dialog"
+              :persistent="true"
               max-width="290"
-              v-bind:persistent=true
             >
               <v-card>
                 <v-card-title class="headline">Horários finalizados.</v-card-title>
                 <v-card-text>Os horários para esta linha já foram finalizados,
                 tente selecionar outra linha no menu Linhas Disponíveis.</v-card-text>
                 <v-btn
-                    color="teal"
-                    flat="flat"
-                    @click="goToRoute('inicio')">
-                    Ok
-                  </v-btn>
-                <v-card-actions>
-                </v-card-actions>
+                  color="teal"
+                  flat="flat"
+                  @click="goToRoute('inicio')">
+                  Ok
+                </v-btn>
+                <v-card-actions/>
               </v-card>
             </v-dialog>
           </div>
@@ -181,7 +180,7 @@ export default {
           item: null,
           msg: "",
           res: null,
-          err: null
+          error: null
         }
     },
   mounted () {
@@ -231,8 +230,8 @@ export default {
           this.horarios = this.res[this.diaUtil]
           this.saveItem()
         })
-        .catch(err => {
-          this.err = true
+        .catch(() => {
+          this.error = true
           this.msg = 'Falha ao baixar os horários, conecte-se a internet e tente novamente.'
           this.dialog = true
           this.loading = false
@@ -260,7 +259,7 @@ export default {
     goToRoute: function(route){
       this.$router.push({ name : route})
     },
-    compareTimeInicio: function(horarioAtual) {
+    compareTimeInicio: function() {
       for(let i = 0; i < this.horarios.length; i++) {
         if (this.horarios[i].inicio >= this.horarioAtual && this.horarios[i].inicio.length >= 4) {
           this.horarioProximoInicio = this.horarios[i].inicio
@@ -270,7 +269,7 @@ export default {
       }
      return this.successInicio = false
     },
-    compareTimeFim: function(horarioAtual) {
+    compareTimeFim: function() {
       for(let i = 0; i < this.horarios.length; i++) {
         if (this.horarios[i].fim >= this.horarioAtual && this.horarios[i].fim.length >= 4) {
           this.horarioProximoFim = this.horarios[i].fim

@@ -5,7 +5,7 @@
     fill-height>
     <v-container>
       <div class="title">Linhas Metropolitanas:</div>
-    </br>
+      <br>
       <v-flex
         xs12
         sm12
@@ -15,7 +15,6 @@
         <v-btn
           v-for="linha in linhas"
           outline
-          large
           color="teal"
           @click="passValues(linha)">
           <strong>{{ linha.linha }}</strong>

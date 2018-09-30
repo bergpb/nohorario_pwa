@@ -9,16 +9,10 @@
     <v-container>
       <div class="title">Selecione uma linha de sua preferência:</div>
       <br>
-      <v-flex
-        xs12
-        sm12
-        md12
-        lg12
-        xl12>
+      <v-flex>
         <v-btn
           v-for="linha in linhas"
           outline
-          large
           color="teal"
           @click="saveLine(linha)">
           <strong>{{ linha.linha }}</strong>

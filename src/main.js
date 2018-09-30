@@ -10,13 +10,14 @@ Vue.use(Vuetify, {
   theme: {
     primary: '#1976D2',
     secondary: '#424242',
+    success: '#4CAF50',
+    info: '#2196F3',
+    warning: '#FFC107',
+    danger: '#C82333',
+    error: '#FF5252',
+    app: '#F65E02',
     orange: '#EF6C00',
     accent: '#82B1FF',
-    error: '#FF5252',
-    info: '#2196F3',
-    success: '#4CAF50',
-    warning: '#FFC107',
-    app: '#F65E02'
   }
 });
 

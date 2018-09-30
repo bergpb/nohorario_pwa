@@ -25,7 +25,7 @@
         >
           <v-card>
             <v-card-title class="headline">Ops!</v-card-title>
-            <v-card-text>{{msg}}</v-card-text>
+            <v-card-text>{{ msg }}</v-card-text>
             <v-card-actions>
               <v-spacer/>
               <v-btn
@@ -41,28 +41,28 @@
       </v-layout>
     </div>
     <div v-else>
-        <div v-if="dialog_success">
-            <v-dialog
-                v-model="dialog_success"
-                max-width="290"
-                >
-                <v-card>
-                    <v-card-title class="headline">Horários salvos!</v-card-title>
-                    <v-card-text>{{msg}}</v-card-text>
-                    <v-card-actions>
-                        <v-spacer/>
-                        <v-btn
-                        color="teal"
-                        flat="flat"
-                        @click.native="dialog_success = false"
-                        >
-                        Ok!
-                        </v-btn>
-                    </v-card-actions>
-                </v-card>
-            </v-dialog>
-        </div>
+      <div v-if="dialog_success">
+        <v-dialog
+          v-model="dialog_success"
+          max-width="290"
+        >
+          <v-card>
+            <v-card-title class="headline">Horários salvos!</v-card-title>
+            <v-card-text>{{ msg }}</v-card-text>
+            <v-card-actions>
+              <v-spacer/>
+              <v-btn
+                color="teal"
+                flat="flat"
+                @click.native="dialog_success = false">
+                Ok!
+              </v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-dialog>
+      </div>
       <v-tabs
+        v-model="tab_ativa"
         slot="extension"
         centered
         fixed-tabs
@@ -71,6 +71,7 @@
         slider-color="teal">
         <v-tab
           v-for="tab in tabs"
+          :key="tab.id"
           @click="getTab(tab.key)">
           {{ tab.name }}
         </v-tab>
@@ -82,9 +83,10 @@
         wrap
         fill-height>
         <table>
-          <tr v-for="horario in horarios">
+          <tr
+            v-for="horario in horarios">
             <td><h2>{{ horario.inicio }}</h2></td>
-            <td/>
+            <td></td>
             <td><h2>{{ horario.fim }}</h2></td>
           </tr>
         </table>
@@ -137,7 +139,7 @@
 </template>
 
 <script>
-import { retornaDia, showSnackbar } from '../utils/utils.js'
+import { retornaDia, retornaTabAtiva } from '../utils/utils.js'
 
 export default {
   name: 'Horarioscomponent',
@@ -157,19 +159,20 @@ export default {
       msg: '',
       dialog_success: false,
       dialog_error: false,
-      error: false,
+      tab_ativa: null,
       tabs: [
-                { name: 'Dias Úteis',key: 'dias_uteis' },
-                { name: 'Sábado', key: 'sabado' },
-                { name: 'Domingo', key: 'domingo' }
+                { id: 0, name: 'Dias Úteis',key: 'dias_uteis' },
+                { id: 1, name: 'Sábado', key: 'sabado' },
+                { id: 2, name: 'Domingo', key: 'domingo' }
         ],
     }
   },
   mounted () {
     this.diaUtil = retornaDia()
     this.nomeLinha = this.$route.params.item
+    this.tab_ativa = retornaTabAtiva()
     if (this.nomeLinha == null){
-      this.$router.push({ name : 'inicio'})
+      this.$router.push({ name : 'linhas'})
     }
     else{
       this.checkLocalStorage();
@@ -198,7 +201,7 @@ export default {
           this.horarios = this.res[this.diaUtil]
           this.saveItem()
         })
-        .catch(err => {
+        .catch(() => {
           this.error = true
           this.msg = "Falha ao baixar os horários, conecte-se a internet e tente novamente."
           this.dialog_error = true
@@ -208,7 +211,7 @@ export default {
         })
     },
     getTab(tab_value) {
-      this.horarios =this.res[tab_value]
+      this.horarios = this.res[tab_value]
     },
     saveItem() {
       localStorage.setItem(this.nomeLinha.arquivo, JSON.stringify(this.res))
