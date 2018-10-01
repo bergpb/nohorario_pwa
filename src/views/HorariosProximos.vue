@@ -214,29 +214,30 @@ export default {
         }
       }
     },
-    getData: function(){
-      this.res = JSON.parse(localStorage.getItem(this.item.arquivo))
-      if (this.res != null){
+    getData: function() {
+      debugger
+      fetch('https://busintimeapi.herokuapp.com/api/'+this.item.arquivo)
+      .then(response => response.json())
+      .then((res) => {
+        this.res = res
         this.horarios = this.res[this.diaUtil]
-        this.timeout = setTimeout( () => {
-          this.loading = false;
-        }, 2000);
-      }
-      else{
-        fetch('https://busintimeapi.herokuapp.com/api/'+this.item.arquivo)
-        .then(response => response.json())
-        .then((res) => {
-          this.res = res
+        this.saveItem()
+      })
+      .catch(() => {
+        this.res = JSON.parse(localStorage.getItem(this.item.arquivo))
+        if (this.res != null){
           this.horarios = this.res[this.diaUtil]
-          this.saveItem()
-        })
-        .catch(() => {
+          this.timeout = setTimeout(() => {
+            this.loading = false;
+            }, 2000);
+          }
+        else{
           this.error = true
           this.msg = 'Falha ao baixar os horários, conecte-se a internet e tente novamente.'
           this.dialog = true
           this.loading = false
-        })
         }
+      })
     },
     saveItem() {
       salvaLocalStorage(this.item.arquivo, JSON.stringify(this.res))

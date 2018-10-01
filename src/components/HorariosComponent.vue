@@ -41,7 +41,7 @@
       </v-layout>
     </div>
     <div v-else>
-      <div v-if="dialog_success">
+      <!-- <div v-if="dialog_success">
         <v-dialog
           v-model="dialog_success"
           max-width="290"
@@ -60,7 +60,7 @@
             </v-card-actions>
           </v-card>
         </v-dialog>
-      </div>
+      </div> -->
       <v-tabs
         v-model="tab_ativa"
         slot="extension"
@@ -128,7 +128,7 @@
               (J) - Passa na Jandaiguaba.<br>
               (P) - Viagem atende a Pedreiras.<br>
               (@) Viagem Fortaleza/Planalto/Capuan.<br>
-              (#) - Viagem parte da movelária/Paizinha.<br>
+              (#) - Viagem parte da movelária/Paizinha.<br>pro
               (%) - Segue até a Entrada da Pyla.<br>
               Obs.: Na viagem de 05:30 o carro parte às 05:20 de Pedreira.s</p>
           </div>
@@ -181,11 +181,11 @@ export default {
       dialog_error: false,
       tab_ativa: null,
       tabs: [
-                { id: 0, name: 'Dias Úteis',key: 'dias_uteis' },
-                { id: 1, name: 'Sábado', key: 'sabado' },
-                { id: 2, name: 'Domingo', key: 'domingo' }
-        ],
-    }
+              { id: 0, name: 'Dias Úteis',key: 'dias_uteis' },
+              { id: 1, name: 'Sábado', key: 'sabado' },
+              { id: 2, name: 'Domingo', key: 'domingo' }
+            ],
+      }
   },
   mounted () {
     this.diaUtil = retornaDia()
@@ -195,26 +195,15 @@ export default {
       this.$router.push({ name : 'linhas'})
     }
     else{
-      this.checkLocalStorage();
+      this.getFromApi();
     }
   },
   methods: {
-    checkLocalStorage(){
-      // se json existir no local traz dele
-      this.res = JSON.parse(localStorage.getItem(this.nomeLinha.arquivo))
-      if (this.res != null){
-        this.horarios = this.res[this.diaUtil]
-        this.loading = false
-      }
-      else{
-        // se não busca na api.
-        // mostrar aviso caso usuario tente baixar um sem conexão com a internet
-        this.updateData()
-      }
+    getFromApi(){
+      this.updateData()
     },
     updateData() {
       fetch('https://busintimeapi.herokuapp.com/api/'+this.nomeLinha.arquivo)
-      // fetch('http://localhost:5000/api/'+this.nomeLinha.arquivo)
         .then(response => response.json())
         .then((res) => {
           this.res = res
@@ -222,9 +211,17 @@ export default {
           this.saveItem()
         })
         .catch(() => {
-          this.error = true
-          this.msg = "Falha ao baixar os horários, conecte-se a internet e tente novamente."
-          this.dialog_error = true
+          this.res = JSON.parse(localStorage.getItem(this.nomeLinha.arquivo))
+          if (this.res != null){
+            this.res = JSON.parse(localStorage.getItem(this.nomeLinha.arquivo))
+            this.horarios = this.res[this.diaUtil]
+            this.loading = false
+          }
+          else{
+            this.error = true
+            this.msg = "Falha ao baixar os horários, conecte-se a internet e tente novamente."
+            this.dialog_error = true
+          }
         })
         .finally(() => {
           this.loading = false
@@ -235,8 +232,8 @@ export default {
     },
     saveItem() {
       localStorage.setItem(this.nomeLinha.arquivo, JSON.stringify(this.res))
-      this.msg = 'Agora é possível visualizá-los mesmo sem internet.'
-      this.dialog_success = true
+      // this.msg = 'Agora é possível visualizá-los mesmo sem internet.'
+      // this.dialog_success = true
     }
   },
 }
