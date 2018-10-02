@@ -41,6 +41,20 @@
       </v-layout>
     </div>
     <div v-else>
+      <v-snackbar
+        v-model="snackbar"
+        :color="'success'"
+        :timeout="6000"
+      >
+        {{ msg }}
+        <v-btn
+          dark
+          flat
+          @click="snackbar = false"
+        >
+          OK
+        </v-btn>
+      </v-snackbar>
       <!-- <div v-if="dialog_success">
         <v-dialog
           v-model="dialog_success"
@@ -165,6 +179,7 @@ export default {
   name: 'Horarioscomponent',
   data () {
     return {
+      snackbar: null,
       res: null,
       horarios: null,
       nomeLinha: null,
@@ -232,8 +247,8 @@ export default {
     },
     saveItem() {
       localStorage.setItem(this.nomeLinha.arquivo, JSON.stringify(this.res))
-      // this.msg = 'Agora é possível visualizá-los mesmo sem internet.'
-      // this.dialog_success = true
+      this.msg = 'Horários atualizados! Agora é possível visualizá-los mesmo sem internet.'
+      this.snackbar = true
     }
   },
 }

@@ -31,14 +31,28 @@
             </v-container>
           </div>
           <div v-else-if="successInicio === true && successFim === true">
-            <v-dialog
+            <v-snackbar
+              v-model="snackbar"
+              :color="'success'"
+              :timeout="6000"
+            >
+              {{ msg }}
+              <v-btn
+                dark
+                flat
+                @click="snackbar = false"
+              >
+                OK
+              </v-btn>
+            </v-snackbar>
+            <!-- <v-dialog
               v-if="dialog === true"
               v-model="dialog"
               :persistent="true"
               max-width="290"
             >
               <v-card>
-                <v-card-title class="headline">Horários salvos!</v-card-title>
+                <v-card-title class="headline">Horários atualizados!</v-card-title>
                 <v-card-text>{{ msg }}</v-card-text>
                 <v-btn
                   color="teal"
@@ -48,7 +62,7 @@
                 </v-btn>
                 <v-card-actions/>
               </v-card>
-            </v-dialog>
+            </v-dialog> -->
             <p style="font-size: 6em"><strong>{{ horarioAtual }}</strong></p>
             <h1>{{ item.linha }}</h1>
             <h3>Valor: {{ item.preco }}</h3>
@@ -165,6 +179,7 @@ export default {
   name: 'Horariosproximos',
   data () {
       return {
+          snackbar: null,
           loading: null,
           dialog: null,
           horarioAtual: null,
@@ -215,7 +230,6 @@ export default {
       }
     },
     getData: function() {
-      debugger
       fetch('https://busintimeapi.herokuapp.com/api/'+this.item.arquivo)
       .then(response => response.json())
       .then((res) => {
@@ -241,8 +255,9 @@ export default {
     },
     saveItem() {
       salvaLocalStorage(this.item.arquivo, JSON.stringify(this.res))
-      this.dialog = true
-      this.msg = 'Agora é possível visualizá-los mesmo sem internet.'
+      // this.dialog = true
+      this.snackbar = true
+      this.msg = 'Horários atualizados! Agora é possível visualizá-los mesmo sem internet.'
       this.loading = false
     },
     updateTime: function() {
