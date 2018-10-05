@@ -179,7 +179,6 @@ export default {
   name: 'Horarioscomponent',
   data () {
     return {
-      snackbar: null,
       res: null,
       horarios: null,
       nomeLinha: null,

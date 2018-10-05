@@ -25,7 +25,7 @@
 </template>
 
 <script>
-import {retornaLinhasDisponiveis, salvaLocalStorage, retornaLocalStorage } from '../utils/utils.js'
+import { retornaLinhasDisponiveis, salvaLocalStorage, retornaLocalStorage } from '../utils/utils.js'
 
 export default {
   name: 'LinhaPreferida',

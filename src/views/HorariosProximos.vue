@@ -210,9 +210,8 @@ export default {
   },
   methods: {
     getItens: function() {
-      let key = "preferedLine"
       this.diaUtil = retornaDia();
-      this.item = retornaLocalStorage(key)
+      this.item = retornaLocalStorage("preferedLine")
       if (this.item != null){
         this.getData()
       }
@@ -243,8 +242,8 @@ export default {
           this.horarios = this.res[this.diaUtil]
           this.timeout = setTimeout(() => {
             this.loading = false;
-            }, 2000);
-          }
+            }, 1500);
+        }
         else{
           this.error = true
           this.msg = 'Falha ao baixar os horários, conecte-se a internet e tente novamente.'
@@ -255,10 +254,11 @@ export default {
     },
     saveItem() {
       salvaLocalStorage(this.item.arquivo, JSON.stringify(this.res))
-      // this.dialog = true
       this.snackbar = true
       this.msg = 'Horários atualizados! Agora é possível visualizá-los mesmo sem internet.'
-      this.loading = false
+      this.timeout = setTimeout(() => {
+        this.loading = false;
+      }, 1500);
     },
     updateTime: function() {
       this.horarioAtual = moment().format('HH:mm');

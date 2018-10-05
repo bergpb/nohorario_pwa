@@ -13,8 +13,7 @@
         <v-flex xs6 sm6 md6 lg6 xl6>
           <v-btn
               color="success"
-              dark
-              @click="dialog = true">
+              dark >
               {{ linhaPreferida.linha }}
             </v-btn>
         </v-flex>
