@@ -158,8 +158,31 @@
                 <v-btn
                   color="teal"
                   flat="flat"
+                  @click="goToRoute('horarioslinha')">
+                  Ir para Linhas Disponíveis
+                </v-btn>
+                <v-btn
+                  color="teal"
+                  flat="flat"
                   @click="goToRoute('inicio')">
-                  Ok
+                  Ir para o Início
+                </v-btn>
+                <v-card-actions/>
+              </v-card>
+            </v-dialog>
+          </div>
+          <div v-else>
+            <v-dialog
+              :persistent="true"
+              max-width="290">
+              <v-card>
+                <v-card-title class="headline">Ops!</v-card-title>
+                <v-card-text>Algo de errado aconteceu, tente novamente.</v-card-text>
+                <v-btn
+                  color="teal"
+                  flat="flat"
+                  @click="goToRoute('inicio')">
+                  Ir para o início.
                 </v-btn>
                 <v-card-actions/>
               </v-card>
@@ -179,23 +202,23 @@ export default {
   name: 'Horariosproximos',
   data () {
       return {
-          snackbar: null,
-          loading: null,
-          dialog: null,
+          snackbar: false,
+          loading: false,
+          dialog: false,
           horarioAtual: null,
           horarioProximoInicio: null,
           horarioAnteriorInicio: null,
           horarioProximoFim: null,
           horarioAnteriorFim: null,
-          successInicio: null,
-          successFim: null,
+          successInicio: false,
+          successFim: false,
           horarios: false,
           selecione: false,
           diaUtil: null,
           item: null,
-          msg: "",
+          msg: null,
           res: null,
-          error: null
+          error: false
         }
     },
   mounted () {
@@ -229,6 +252,7 @@ export default {
       }
     },
     getData: function() {
+      debugger
       fetch('https://busintimeapi.herokuapp.com/api/'+this.item.arquivo)
       .then(response => response.json())
       .then((res) => {
@@ -262,8 +286,8 @@ export default {
     },
     updateTime: function() {
       this.horarioAtual = moment().format('HH:mm');
-      let inicio = this.compareTimeInicio(this.horarioAtual);
-      let fim = this.compareTimeFim(this.horarioAtual);
+      let inicio = this.compareTimeInicio();
+      let fim = this.compareTimeFim();
       if (inicio === false && fim === false){
           clearInterval(this.interval);
           this.successInicio = false
@@ -273,7 +297,7 @@ export default {
       }
     },
     goToRoute: function(route){
-      this.$router.push({ name : route})
+      this.$router.push({ name : route })
     },
     compareTimeInicio: function() {
       for(let i = 0; i < this.horarios.length; i++) {
@@ -283,7 +307,7 @@ export default {
           return this.successInicio = true
         }
       }
-     return this.successInicio = false
+      return this.successInicio = false
     },
     compareTimeFim: function() {
       for(let i = 0; i < this.horarios.length; i++) {
@@ -293,7 +317,7 @@ export default {
           return this.successFim = true
         }
       }
-      return this.successInicio = false
+      return this.successFim = false
     },
   }
 }

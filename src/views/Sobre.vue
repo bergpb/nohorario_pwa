@@ -10,14 +10,12 @@
       <h3>Linha Preferida:</h3>
       <br>
       <v-layout row align-center>
-        <v-flex xs6 sm6 md6 lg6 xl6>
+        <v-flex align-center xs12 sm12 md12 lg12 xl12>
           <v-btn
               color="success"
               dark >
               {{ linhaPreferida.linha }}
             </v-btn>
-        </v-flex>
-        <v-flex xs6 sm6 md6 lg6 xl6>
             <v-btn
               color="danger"
               dark
