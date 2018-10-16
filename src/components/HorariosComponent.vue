@@ -76,8 +76,8 @@
         </v-dialog>
       </div> -->
       <v-tabs
-        v-model="tab_ativa"
         slot="extension"
+        v-model="tab_ativa"
         centered
         fixed-tabs
         grow
@@ -100,7 +100,7 @@
           <tr
             v-for="horario in horarios">
             <td><h2>{{ horario.inicio }}</h2></td>
-            <td></td>
+            <td/>
             <td><h2>{{ horario.fim }}</h2></td>
           </tr>
         </table>
@@ -154,7 +154,7 @@
               class="title">Legendas:</div>
             <br>
             <p>(*) - Viagem atendendo a rota 2 e sai na rota 1.<br>
-               (T) - Viagem atendendo a localidade de Tôco.</p>
+              (T) - Viagem atendendo a localidade de Tôco.</p>
           </div>
           <div
             v-show = "nomeLinha.arquivo === 'metropole2-fortaleza'"
@@ -164,7 +164,7 @@
               class="title">Legendas:</div>
             <br>
             <p>(*) - Viagem atendendo a rota 2 e sai na rota 1.<br>
-               (T) - Viagem atendendo a localidade de Tôco.</p>
+              (T) - Viagem atendendo a localidade de Tôco.</p>
           </div>
         </v-container>
       </v-layout>

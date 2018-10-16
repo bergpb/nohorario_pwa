@@ -7,11 +7,19 @@
     fill-height>
     <v-container>
       <div v-if="linhaPreferida != null">
-      <h3>Linha Preferida:</h3>
-      <br>
-      <v-layout row align-center>
-        <v-flex align-center xs12 sm12 md12 lg12 xl12>
-          <v-btn
+        <h3>Linha Preferida:</h3>
+        <br>
+        <v-layout 
+          row 
+          align-center>
+          <v-flex 
+            align-center 
+            xs12 
+            sm12 
+            md12 
+            lg12 
+            xl12>
+            <v-btn
               color="success"
               dark >
               {{ linhaPreferida.linha }}
@@ -22,9 +30,9 @@
               @click="dialog = true">
               Remover Linha
             </v-btn>
-        </v-flex>
-      </v-layout>
-      <v-dialog
+          </v-flex>
+        </v-layout>
+        <v-dialog
           v-model="dialog"
           persistent
           max-width="290">
@@ -44,16 +52,16 @@
             </v-card-actions>
           </v-card>
         </v-dialog>
-        </div>
-        <div v-else>
-         <h2>Aqui serão mostradas suas preferências.</h2>
-        </div>
-        <div>
-         <br>
-         <h4>Acompanhe os horários das linhas da Empresa Vitória sempre que precisar<br> mesmo sem *conexão com a internet.</h4>
-         <br>
-         <p>* Necessário ter acessado a linha com internet para que o app possa salvá-la para acesso offline(sem conexão com a internet).</p>
-        </div>
+      </div>
+      <div v-else>
+        <h2>Aqui serão mostradas suas preferências.</h2>
+      </div>
+      <div>
+        <br>
+        <h4>Acompanhe os horários das linhas da Empresa Vitória sempre que precisar<br> mesmo sem *conexão com a internet.</h4>
+        <br>
+        <p>*Necessário acesso anterior com internet para que o app possa salvá-la para acesso offline(sem conexão com a internet).</p>
+      </div>
     </v-container>
   </v-layout>
 </template>
@@ -74,7 +82,7 @@ import { retornaLinhasDisponiveis, retornaLocalStorage } from '../utils/utils.js
   mounted () {
     this.linhas = retornaLinhasDisponiveis()
     this.returnData()
-    this.interval = setInterval( () => {
+    this.interval = setInterval(() => {
       this.returnData()
     }, 500)
   },

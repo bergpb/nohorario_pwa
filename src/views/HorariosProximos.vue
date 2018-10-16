@@ -13,8 +13,7 @@
           align-center
           justify-center
           wrap
-          fill-height
-        >
+          fill-height>
           <div v-if="loading">
             <v-container fill-height>
               <v-layout
@@ -34,14 +33,12 @@
             <v-snackbar
               v-model="snackbar"
               :color="'success'"
-              :timeout="6000"
-            >
+              :timeout="6000">
               {{ msg }}
               <v-btn
                 dark
                 flat
-                @click="snackbar = false"
-              >
+                @click="snackbar = false">
                 OK
               </v-btn>
             </v-snackbar>
@@ -111,8 +108,7 @@
             <v-dialog
               v-model="dialog"
               :persistent="true"
-              max-width="290"
-            >
+              max-width="290">
               <v-card>
                 <v-card-title class="headline">Ops!</v-card-title>
                 <v-card-text>{{ msg }}</v-card-text>
@@ -130,8 +126,7 @@
             <v-dialog
               v-model="dialog"
               :persistent="true"
-              max-width="290"
-            >
+              max-width="290">
               <v-card>
                 <v-card-title class="headline">Sem conexão!</v-card-title>
                 <v-card-text>{{ msg }}</v-card-text>
@@ -145,12 +140,11 @@
               </v-card>
             </v-dialog>
           </div>
-          <div v-else-if="successInicio === false">
+          <div v-else-if="successInicio === false || successFim === false">
             <v-dialog
               v-model="dialog"
               :persistent="true"
-              max-width="290"
-            >
+              max-width="290">
               <v-card>
                 <v-card-title class="headline">Horários finalizados.</v-card-title>
                 <v-card-text>Os horários para esta linha já foram finalizados,
@@ -252,7 +246,6 @@ export default {
       }
     },
     getData: function() {
-      debugger
       fetch('https://busintimeapi.herokuapp.com/api/'+this.item.arquivo)
       .then(response => response.json())
       .then((res) => {
@@ -264,6 +257,7 @@ export default {
         this.res = JSON.parse(localStorage.getItem(this.item.arquivo))
         if (this.res != null){
           this.horarios = this.res[this.diaUtil]
+          
           this.timeout = setTimeout(() => {
             this.loading = false;
             }, 1500);
@@ -302,22 +296,38 @@ export default {
     compareTimeInicio: function() {
       for(let i = 0; i < this.horarios.length; i++) {
         if (this.horarios[i].inicio >= this.horarioAtual && this.horarios[i].inicio.length >= 4) {
-          this.horarioProximoInicio = this.horarios[i].inicio
-          this.horarioAnteriorInicio = this.horarios[i-1].inicio
-          return this.successInicio = true
+          try{
+            this.horarioAnteriorInicio = this.horarios[i-1].inicio
+            this.horarioProximoInicio = this.horarios[i].inicio
+            return this.successInicio = true
+            if (i >= 1) {
+              break
+            }
+          }
+          catch(err){
+            clearInterval(this.interval);
+            return this.successInicio = false
+          }
         }
       }
-      return this.successInicio = false
     },
     compareTimeFim: function() {
       for(let i = 0; i < this.horarios.length; i++) {
         if (this.horarios[i].fim >= this.horarioAtual && this.horarios[i].fim.length >= 4) {
-          this.horarioProximoFim = this.horarios[i].fim
-          this.horarioAnteriorFim = this.horarios[i-1].fim
-          return this.successFim = true
+          try{
+            this.horarioAnteriorFim = this.horarios[i-1].fim
+            this.horarioProximoFim = this.horarios[i].fim
+            this.successFim = true
+            if (i >= 1) {
+              break
+            }
+          }
+          catch(err){
+            clearInterval(this.interval);
+            return this.successFim = false
+          }
         }
       }
-      return this.successFim = false
     },
   }
 }

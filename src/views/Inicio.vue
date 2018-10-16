@@ -16,12 +16,12 @@
           outline
           color="teal"
           @click="goToRoute('linha-preferida')">
-          <strong>Selecionar uma linha preferida</strong></v-btn>
+        <strong>Selecionar uma linha preferida</strong></v-btn>
         <v-btn
           outline
           color="teal"
           @click="goToRoute('linhas')">
-          <strong>Mostrar linhas disponíveis</strong></v-btn>
+        <strong>Mostrar linhas disponíveis</strong></v-btn>
       </div>
       <div v-else>
         <h2>Olá, bem vindo(a) novamente.</h2>
