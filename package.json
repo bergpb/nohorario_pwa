@@ -6,9 +6,13 @@
     "dev": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
+    "postbuild": "gulp inject:before",
     "start": "node server.js"
   },
   "dependencies": {
+    "gulp": "^3.9.1",
+    "gulp-inject-string": "^1.1.1",
+    "gulp-rename": "^1.4.0",
     "material-design-icons-iconfont": "^3.0.3",
     "register-service-worker": "^1.0.0",
     "vue": "^2.5.17",
