@@ -97,6 +97,26 @@
         wrap
         fill-height>
         <table>
+          <thead>
+            <tr>
+              <th>
+                  <v-chip
+                    color="teal"
+                    text-color="white">
+                    <strong>{{ pontos.pontoPartida }}</strong>
+                    <v-icon right >location_on</v-icon>
+                  </v-chip>
+              <th/>
+              <th>
+                  <v-chip
+                    color="teal"
+                    text-color="white">
+                    <strong>Fortaleza</strong>
+                    <v-icon right >location_on</v-icon>
+                  </v-chip>
+                </th>
+            </tr>
+          </thead>
           <tr
             v-for="horario in horarios">
             <td><h2>{{ horario.inicio }}</h2></td>
@@ -173,7 +193,7 @@
 </template>
 
 <script>
-import { retornaDia, retornaTabAtiva } from '../utils/utils.js'
+import { retornaDia, retornaTabAtiva, retornaLocalStorage } from '../utils/utils.js'
 
 export default {
   name: 'Horarioscomponent',
@@ -184,6 +204,7 @@ export default {
       nomeLinha: null,
       linhaAtual: null,
       diaUtil: null,
+      pontos: null,
       loading: true,
       error: null,
       snackbar: false,
@@ -205,6 +226,8 @@ export default {
     this.diaUtil = retornaDia()
     this.nomeLinha = this.$route.params.item
     this.tab_ativa = retornaTabAtiva()
+    this.pontos = this.$route.params.item
+    
     if (this.nomeLinha == null){
       this.$router.push({ name : 'linhas'})
     }
@@ -264,6 +287,10 @@ export default {
 
 .horarios {
   padding-top: 60px;
+}
+
+th {
+  font-size: 1em;
 }
 
 td {

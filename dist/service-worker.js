@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.4.1/workbox-sw.js");
 
 importScripts(
-  "/precache-manifest.4fbc7daf2571c1b253f1033f6e573543.js"
+  "/precache-manifest.ad9f2e8b38400145e23afbd9f4fe3cbc.js"
 );
 
 //networkfirst all routes
