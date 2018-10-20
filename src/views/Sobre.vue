@@ -9,15 +9,15 @@
       <div v-if="linhaPreferida != null">
         <h3>Linha Preferida:</h3>
         <br>
-        <v-layout 
-          row 
+        <v-layout
+          row
           align-center>
-          <v-flex 
-            align-center 
-            xs12 
-            sm12 
-            md12 
-            lg12 
+          <v-flex
+            align-center
+            xs12
+            sm12
+            md12
+            lg12
             xl12>
             <v-btn
               color="success"
@@ -60,7 +60,7 @@
         <br>
         <h4>Acompanhe os horários das linhas da Empresa Vitória sempre que precisar<br> mesmo sem *conexão com a internet.</h4>
         <br>
-        <p>*Necessário acesso anterior com internet para que o app possa salvá-la para acesso offline(sem conexão com a internet).</p>
+        <p>*Necessário acesso anterior com internet as linhas no menu Linhas Disponíveis, ou selecionar uma linha preferida, para que o app possa salvá-la para acesso offline(sem conexão com a internet).</p>
       </div>
     </v-container>
   </v-layout>
